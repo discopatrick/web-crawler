@@ -1,5 +1,6 @@
 import requests
 from pyquery import PyQuery as pq
+from urllib.parse import urlparse
 
 
 def make_request(url):
@@ -16,3 +17,7 @@ def get_link_list_from_links(links):
   for link in links:
     output += pq(link).attr['href'] + '\n'
   return output
+
+def link_belongs_to_domain(link, domain):
+  parsed = urlparse(link)
+  return domain == parsed.netloc

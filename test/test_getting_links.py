@@ -20,3 +20,12 @@ class LinkGetterTest(TestCase):
     links = get_links_from_string(string)
 
     self.assertEqual(len(links), 2)
+
+  def test_link_belongs_to_domain(self):
+
+    domain = 'www.bbc.co.uk'
+    link_from_domain = 'http://www.bbc.co.uk/contact-us/'
+    link_outside_domain = 'http://www.facebook.com/faq/'
+
+    self.assertTrue(link_belongs_to_domain(link_from_domain, domain))
+    self.assertFalse(link_belongs_to_domain(link_outside_domain, domain))
