@@ -5,8 +5,11 @@ from urllib.parse import urlparse, urljoin
 
 
 def make_request(url):
-  r = requests.get(url)
-  return r
+  try:
+    r = requests.get(url)
+    return r
+  except requests.exceptions.MissingSchema:
+    return None
 
 def get_anchor_hrefs_from_html_string(string):
   doc = pq(string)
@@ -51,6 +54,8 @@ def uniquify(seq):
 def get_internal_links_from_url(url):
   domain = urlparse(url).netloc
   response = make_request(url)
+  if response is None:
+    return []
   anchor_hrefs = get_anchor_hrefs_from_html_string(response.text)
   unique = uniquify(anchor_hrefs)
   absolute_link_list = get_absolute_links(url, unique)

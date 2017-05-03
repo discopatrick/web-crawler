@@ -14,3 +14,9 @@ class HttpRequestTest(TestCase):
     response = make_request(url)
 
     self.assertIsNotNone(response.text)
+
+  def test_bad_url(self):
+    url = 'asdf'
+    response = make_request(url)
+
+    self.assertIsNone(response)
