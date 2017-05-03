@@ -1,4 +1,5 @@
 import requests
+import sys
 from pyquery import PyQuery as pq
 from urllib.parse import urlparse
 
@@ -24,6 +25,8 @@ def link_belongs_to_domain(link, domain):
 
 def main():
   print('Hello Sitemap')
+  for arg in sys.argv[1:]:
+    print(arg)
 
 if __name__ == '__main__':
   main()
