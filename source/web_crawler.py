@@ -23,7 +23,14 @@ def link_belongs_to_domain(link, domain):
   parsed = urlparse(link)
   return domain == parsed.netloc
 
+def validate_argument_count(args):
+  if len(args) == 2:
+    return True
+  else:
+    raise SystemExit('Too many arguments')
+
 def main():
+  validate_argument_count(sys.argv)
   print('Hello Sitemap')
   for arg in sys.argv[1:]:
     print(arg)
