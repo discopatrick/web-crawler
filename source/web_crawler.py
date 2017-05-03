@@ -1,4 +1,5 @@
 import requests
+import sys
 from pyquery import PyQuery as pq
 from urllib.parse import urlparse
 
@@ -21,3 +22,11 @@ def get_link_list_from_links(links):
 def link_belongs_to_domain(link, domain):
   parsed = urlparse(link)
   return domain == parsed.netloc
+
+def main():
+  print('Hello Sitemap')
+  for arg in sys.argv[1:]:
+    print(arg)
+
+if __name__ == '__main__':
+  main()
