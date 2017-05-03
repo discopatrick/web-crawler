@@ -39,11 +39,21 @@ def get_links_internal_to_domain(links, domain):
       internal_links.append(link)
   return internal_links
 
+def uniquify(seq):
+  """
+  Takes a sequence and quickly removes duplicates
+  http://stackoverflow.com/a/480227/3293805
+  """
+  seen = set()
+  seen_add = seen.add
+  return [x for x in seq if not (x in seen or seen_add(x))]
+
 def get_internal_links_from_url(url):
   domain = urlparse(url).netloc
   response = make_request(url)
   anchor_hrefs = get_anchor_hrefs_from_html_string(response.text)
-  absolute_link_list = get_absolute_links(url, anchor_hrefs)
+  unique = uniquify(anchor_hrefs)
+  absolute_link_list = get_absolute_links(url, unique)
   internal_links = get_links_internal_to_domain(absolute_link_list, domain)
   return internal_links
 
