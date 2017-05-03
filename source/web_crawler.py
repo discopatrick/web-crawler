@@ -22,5 +22,8 @@ def link_belongs_to_domain(link, domain):
   parsed = urlparse(link)
   return domain == parsed.netloc
 
-if __name__ == '__main__':
+def main():
   print('Hello Sitemap')
+
+if __name__ == '__main__':
+  main()
