@@ -21,3 +21,6 @@ def get_link_list_from_links(links):
 def link_belongs_to_domain(link, domain):
   parsed = urlparse(link)
   return domain == parsed.netloc
+
+if __name__ == '__main__':
+  print('Hello Sitemap')
