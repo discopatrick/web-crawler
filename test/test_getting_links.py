@@ -3,8 +3,8 @@ from source.web_crawler import *
 
 class LinkGetterTest(TestCase):
 
-  def test_get_links_from_string(self):
-    string = """
+  def test_get_anchor_hrefs_from_html_string(self):
+    html = """
       <html>
         <head>
           <title>My Page</title>
@@ -16,10 +16,9 @@ class LinkGetterTest(TestCase):
         </body>
       </html>
     """
-    
-    links = get_links_from_string(string)
+    anchor_hrefs = get_anchor_hrefs_from_html_string(html)
 
-    self.assertEqual(len(links), 2)
+    self.assertEqual(len(anchor_hrefs), 2)
 
   def test_link_belongs_to_domain(self):
 
