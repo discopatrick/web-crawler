@@ -29,11 +29,13 @@ def validate_argument_count(args):
   else:
     raise SystemExit('Too many arguments')
 
+def crawl(url):
+  pass
+
 def main():
   validate_argument_count(sys.argv)
   print('Hello Sitemap')
-  for arg in sys.argv[1:]:
-    print(arg)
+  crawl(sys.argv[1])
 
 if __name__ == '__main__':
   main()
