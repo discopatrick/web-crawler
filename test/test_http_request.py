@@ -7,4 +7,4 @@ class HttpRequestTest(TestCase):
     url = 'http://www.bbc.co.uk'
     response = make_request(url)
 
-    self.assertEqual(response, 'response')
+    self.assertEqual(response.status_code, 200)

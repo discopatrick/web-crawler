@@ -1,2 +1,5 @@
+import requests
+
 def make_request(url):
-  return 'response'
+  r = requests.get(url)
+  return r
