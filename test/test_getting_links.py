@@ -50,3 +50,18 @@ class LinkGetterTest(TestCase):
     absolute_links = get_absolute_links(base_url, link_list)
 
     self.assertEqual(absolute_links, expected_list)
+
+  def test_remove_query_and_fragment(self):
+
+    link_list = [
+      "http://www.example.com/a?b=c#f",
+      "www.example.com/a?b=c#f",
+    ]    
+    expected_list = [
+      "http://www.example.com/a",
+      "www.example.com/a",
+    ]
+
+    processed_list = remove_query_and_fragment(link_list)
+
+    self.assertEqual(processed_list, expected_list)

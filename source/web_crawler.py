@@ -51,6 +51,16 @@ def uniquify(seq):
   seen_add = seen.add
   return [x for x in seq if not (x in seen or seen_add(x))]
 
+def remove_query_and_fragment(link_list):
+  processed_list = []
+  for link in link_list:
+    p = urlparse(link)
+    new_link = p.netloc + p.path
+    if p.scheme != '':
+      new_link = p.scheme + '://' + new_link
+    processed_list.append(new_link)
+  return processed_list
+
 def get_internal_links_from_url(url):
   domain = urlparse(url).netloc
   response = make_request(url)
