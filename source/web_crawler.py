@@ -69,7 +69,8 @@ def get_internal_links_from_url(url):
   anchor_hrefs = get_anchor_hrefs_from_html_string(response.text)
   unique = uniquify(anchor_hrefs)
   absolute_link_list = get_absolute_links(url, unique)
-  internal_links = get_links_internal_to_domain(absolute_link_list, domain)
+  trimmed_list = remove_query_and_fragment(absolute_link_list)
+  internal_links = get_links_internal_to_domain(trimmed_list, domain)
   return internal_links
 
 def crawl(url):
