@@ -64,8 +64,11 @@ def get_internal_links_from_url(url):
 
 def crawl(url):
   internal_links = get_internal_links_from_url(url)
-  for link in internal_links:
-    print(link)
+  if internal_links:
+    for link in internal_links:
+      print(link)
+  else:
+    print('No internal links found')
 
 def main():
   validate_argument_count(sys.argv)
