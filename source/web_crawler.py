@@ -66,12 +66,12 @@ def get_internal_links_from_url(url):
   response = make_request(url)
   if response is None:
     return []
-  anchor_hrefs = get_anchor_hrefs_from_html_string(response.text)
-  unique = uniquify(anchor_hrefs)
-  absolute_link_list = get_absolute_links(url, unique)
-  trimmed_list = remove_query_and_fragment(absolute_link_list)
-  internal_links = get_links_internal_to_domain(trimmed_list, domain)
-  return internal_links
+  links = get_anchor_hrefs_from_html_string(response.text)
+  links = uniquify(links)
+  links = get_absolute_links(url, links)
+  links = remove_query_and_fragment(links)
+  links = get_links_internal_to_domain(links, domain)
+  return links
 
 def crawl(url):
   internal_links = get_internal_links_from_url(url)
