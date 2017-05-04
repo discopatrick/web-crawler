@@ -76,6 +76,41 @@ def get_internal_links_from_url(url):
   links = get_links_internal_to_domain(links, domain)
   return links
 
+def get_attribute_from_element(attribute, element):
+  """
+  Takes an attribute to search for (string) and an lxml.etree.Element object
+  """
+  return pq(element).attr[attribute]
+
+def get_attribute_list_from_element_list(attribute, element_list):
+  """
+  Takes an attribute to search for (string) and a list
+  of elements as a PyQuery object
+  """
+  attr_list = []
+  for e in element_list:
+    attr = get_attribute_from_element(attribute, e)
+    if attr is not None:
+      attr_list.append(attr)
+  return attr_list
+  
+def get_assets(html):
+  assets = []
+
+  doc = pq(html)
+  
+  a_elements = doc('a')
+  link_elements = doc('link')
+  img_elements = doc('img')
+  script_elements = doc('script')
+
+  assets = assets + get_attribute_list_from_element_list('href', a_elements)
+  assets = assets + get_attribute_list_from_element_list('href', link_elements)
+  assets = assets + get_attribute_list_from_element_list('src', img_elements)
+  assets = assets + get_attribute_list_from_element_list('src', script_elements) 
+
+  return assets
+
 def crawl(url):
   touched.append(url)
 
@@ -83,7 +118,14 @@ def crawl(url):
   if response.headers['content-type'] != 'text/html':
     return
 
-  print(url)
+  print('[page] ' + url)
+
+  assets = get_assets(response.text)
+  if assets:
+    for asset in get_assets(response.text):
+      print('       - ' + asset)
+  else:
+    print('       - (no assets)')
 
   internal_links = get_internal_links_from_url(url)
 

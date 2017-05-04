@@ -1,5 +1,7 @@
 from unittest import TestCase
+from pyquery import PyQuery as pq
 from source.web_crawler import *
+
 
 class LinkGetterTest(TestCase):
 
@@ -65,3 +67,19 @@ class LinkGetterTest(TestCase):
     processed_list = remove_query_and_fragment(link_list)
 
     self.assertEqual(processed_list, expected_list)
+
+
+class AssetGetterTest(TestCase):
+
+  def test_get_attribute_from_element(self):
+    html = """
+      <p>Search for stuff at <a href="http://www.google.co.uk">Google</a></p>
+      <p>Fritter your life away at <a href="http://www.facebook.com">Facebook</a></p>
+    """
+
+    doc = pq(html)
+    a_elements = doc('a')
+    
+    attr = get_attribute_from_element('href', a_elements[0])
+
+    self.assertEqual(attr, 'http://www.google.co.uk')
