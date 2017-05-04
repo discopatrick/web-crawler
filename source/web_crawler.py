@@ -4,6 +4,8 @@ from pyquery import PyQuery as pq
 from urllib.parse import urlparse, urljoin
 
 
+crawled = []
+
 def make_request(url):
   try:
     r = requests.get(url)
@@ -77,7 +79,9 @@ def crawl(url):
   internal_links = get_internal_links_from_url(url)
   if internal_links:
     for link in internal_links:
-      print(link)
+      if link not in crawled:
+        print(link)
+        crawled.append(link)
   else:
     print('No internal links found')
 
