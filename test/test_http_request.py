@@ -23,3 +23,10 @@ class HttpRequestTest(TestCase):
     response = make_request(url)
 
     self.assertIsNone(response)
+
+  def test_https_url(self):
+    url = 'https://www.bbc.co.uk'
+    response = make_request(url)
+
+    self.assertEqual(response.status_code, 200)
+    self.assertTrue(response.headers['content-type'].startswith('text/html'))

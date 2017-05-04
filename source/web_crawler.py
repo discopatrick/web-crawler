@@ -120,7 +120,7 @@ def crawl(url):
   touched.append(url)
 
   response = make_request(url)
-  if response.headers['content-type'] != 'text/html':
+  if response.headers['content-type'].startswith('text/html') is False:
     return
 
   print('[page] ' + url)
