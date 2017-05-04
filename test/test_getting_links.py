@@ -28,3 +28,25 @@ class LinkGetterTest(TestCase):
 
     self.assertTrue(link_belongs_to_domain(link_from_domain, domain))
     self.assertFalse(link_belongs_to_domain(link_outside_domain, domain))
+
+  def test_get_absolute_links(self):
+
+    base_url = "http://www.example.com/a/b.html"
+    link_list = [
+      "http://www.example.com/c/d.html",
+      "/e/f.html",
+      "g/h.html",
+      "./i.html",
+      "../j.html"
+    ]
+    expected_list = [
+      "http://www.example.com/c/d.html",
+      "http://www.example.com/e/f.html",
+      "http://www.example.com/a/g/h.html",
+      "http://www.example.com/a/i.html",
+      "http://www.example.com/j.html",
+    ]
+
+    absolute_links = get_absolute_links(base_url, link_list)
+
+    self.assertEqual(absolute_links, expected_list)
