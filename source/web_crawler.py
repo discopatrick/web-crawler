@@ -38,9 +38,9 @@ def get_absolute_links(url, link_list):
     absolute_links.append(urljoin(url, link))
   return absolute_links
 
-def get_links_internal_to_domain(links, domain):
+def get_links_internal_to_domain(link_list, domain):
   internal_links = []
-  for link in links:
+  for link in link_list:
     if link_belongs_to_domain(link, domain):
       internal_links.append(link)
   return internal_links
