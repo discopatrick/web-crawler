@@ -4,7 +4,7 @@ from pyquery import PyQuery as pq
 from urllib.parse import urlparse, urljoin
 
 
-found = []
+touched = []
 crawled = []
 
 def make_request(url):
@@ -77,19 +77,22 @@ def get_internal_links_from_url(url):
   return links
 
 def crawl(url):
+  touched.append(url)
+
+  response = make_request(url)
+  if response.headers['content-type'] != 'text/html':
+    return
+
+  print(url)
+
   internal_links = get_internal_links_from_url(url)
+
   if internal_links:
     for link in internal_links:
-      if link not in crawled:
-        if link not in found:
-          found.append(link)
+      if link not in touched:
+        crawl(link)
 
-  for link in found:
-    found.remove(link)
-    if link not in crawled:
-      print(link)
-      crawled.append(link)
-      crawl(link)
+  crawled.append(url)
 
 def main():
   validate_argument_count(sys.argv)
