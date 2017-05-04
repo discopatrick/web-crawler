@@ -94,7 +94,7 @@ def get_attribute_list_from_element_list(attribute, element_list):
       attr_list.append(attr)
   return attr_list
   
-def get_assets(html):
+def get_assets(html, url):
   assets = []
 
   doc = pq(html)
@@ -107,7 +107,12 @@ def get_assets(html):
   assets = assets + get_attribute_list_from_element_list('href', a_elements)
   assets = assets + get_attribute_list_from_element_list('href', link_elements)
   assets = assets + get_attribute_list_from_element_list('src', img_elements)
-  assets = assets + get_attribute_list_from_element_list('src', script_elements) 
+  assets = assets + get_attribute_list_from_element_list('src', script_elements)
+
+  assets = uniquify(assets)
+  assets = get_absolute_links(url, assets)
+  assets = remove_query_and_fragment(assets)
+  assets.sort()
 
   return assets
 
@@ -120,9 +125,10 @@ def crawl(url):
 
   print('[page] ' + url)
 
-  assets = get_assets(response.text)
+  assets = get_assets(response.text, url)
+
   if assets:
-    for asset in get_assets(response.text):
+    for asset in assets:
       print('       - ' + asset)
   else:
     print('       - (no assets)')
