@@ -76,6 +76,12 @@ def get_internal_links_from_url(url):
   links = get_links_internal_to_domain(links, domain)
   return links
 
+def get_attribute_from_element(attribute, element):
+  """
+  Takes an attribute to search for (string) and an lxml.etree.Element object
+  """
+  return pq(element).attr[attribute]
+  
 def crawl(url):
   touched.append(url)
 
