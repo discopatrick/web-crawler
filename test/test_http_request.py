@@ -25,6 +25,7 @@ class HttpRequestTest(TestCase):
 
         self.assertIsNone(response)
 
+    @skip
     def test_https_url(self):
         url = 'https://www.bbc.co.uk'
         response = make_request(url)
