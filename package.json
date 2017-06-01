@@ -1,7 +1,7 @@
 {
   "name": "web-crawler",
   "version": "0.1.0",
-  "description": "To run the tests: `python3.6 -m unittest`",
+  "description": "A web crawler project",
   "main": "index.js",
   "directories": {
     "test": "test"
