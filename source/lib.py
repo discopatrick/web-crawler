@@ -1,3 +1,6 @@
+class Crawler(object):
+    pass
+
 class Url(object):
 
     def __init__(self, url):
