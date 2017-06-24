@@ -8,3 +8,5 @@ class CrawlerTest(TestCase):
 
         url = 'http://www.yoyowallet.com/'
         crawler.add_url(url)
+
+        self.assertIn(url, crawler.url_list)
