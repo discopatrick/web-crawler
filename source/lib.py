@@ -1,5 +1,7 @@
 class Crawler(object):
-    pass
+
+    def add_url(self, url):
+        pass
 
 class Url(object):
 
