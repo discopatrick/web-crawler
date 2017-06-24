@@ -5,10 +5,12 @@ class Crawler(object):
 
     @property
     def url_list(self):
-        return tuple(self._url_list)
+        list_of_urls = [url_object.url for url_object in self._url_list]
+        return tuple(list_of_urls)
 
     def add_url(self, url):
-        self._url_list.append(url)
+        url_obj = Url(url)
+        self._url_list.append(Url)
 
 class Url(object):
 
