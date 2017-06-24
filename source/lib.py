@@ -1,2 +1,4 @@
 class Url(object):
-    pass
+
+    def __init__(self, url):
+        pass

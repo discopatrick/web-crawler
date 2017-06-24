@@ -5,4 +5,6 @@ from source.web_crawler import *
 class UrlTest(TestCase):
 
     def test_Url_init(self):
-        url = Url()
+        url_arg = 'http://www.yoyowallet.com'
+
+        url = Url(url_arg)
