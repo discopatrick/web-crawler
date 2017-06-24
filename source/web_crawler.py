@@ -3,6 +3,8 @@ import sys
 from pyquery import PyQuery as pq
 from urllib.parse import urlparse, urljoin
 
+from .lib import Url
+
 
 touched = []
 crawled = []
