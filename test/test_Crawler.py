@@ -4,13 +4,16 @@ from source.web_crawler import *
 class CrawlerTest(TestCase):
 
     def test_Crawler_init(self):
-        crawler = Crawler()
+        start_url = 'http://www.yoyowallet.com'
+
+        crawler = Crawler(start_url)
+
+        self.assertIn(start_url, crawler.url_list)
 
     def test_Crawler_add_url(self):
-        crawler = Crawler()
-        url = 'http://www.yoyowallet.com/'
+        crawler = Crawler('http://www.yoyowallet.com/')
+        additional_url = 'http://www.bbc.co.uk/'
 
-        crawler.add_url(url)
-        crawler.add_url('http://www.bbc.co.uk/')
+        crawler.add_url(additional_url)
 
-        self.assertIn(url, crawler.url_list)
+        self.assertIn(additional_url, crawler.url_list)

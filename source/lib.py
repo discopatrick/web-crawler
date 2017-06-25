@@ -1,7 +1,8 @@
 class Crawler(object):
 
-    def __init__(self):
+    def __init__(self, start_url):
         self._url_list = []
+        self.add_url(start_url)
 
     @property
     def url_list(self):
