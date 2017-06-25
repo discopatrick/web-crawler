@@ -165,6 +165,3 @@ def main():
     crawl(sys.argv[1])
     print('{} link(s) crawled'.format(len(crawled)))
 
-
-if __name__ == '__main__':
-    main()
