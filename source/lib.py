@@ -5,7 +5,7 @@ class Crawler(object):
         self.add_url(start_url)
 
     @property
-    def url_list(self):
+    def url_list_as_strings(self):
         return tuple(url_object.url for url_object in self._url_list)
 
     def add_url(self, url):

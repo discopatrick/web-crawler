@@ -8,7 +8,7 @@ class CrawlerTest(TestCase):
 
         crawler = Crawler(start_url)
 
-        self.assertIn(start_url, crawler.url_list)
+        self.assertIn(start_url, crawler.url_list_as_strings)
 
     def test_Crawler_add_url(self):
         crawler = Crawler('http://www.yoyowallet.com/')
@@ -16,4 +16,4 @@ class CrawlerTest(TestCase):
 
         crawler.add_url(additional_url)
 
-        self.assertIn(additional_url, crawler.url_list)
+        self.assertIn(additional_url, crawler.url_list_as_strings)
