@@ -2,14 +2,14 @@ class Crawler(object):
 
     def __init__(self, start_url):
         self._url_list = []
-        self.add_url(start_url)
+        self.add_url_as_string(start_url)
 
     @property
     def url_list_as_strings(self):
         return tuple(url_object.url for url_object in self._url_list)
 
-    def add_url(self, url):
-        url_obj = Url(url)
+    def add_url_as_string(self, url_string):
+        url_obj = Url(url_string)
         self._url_list.append(url_obj)
 
 class Url(object):
