@@ -3,8 +3,8 @@ import sys
 from pyquery import PyQuery as pq
 from urllib.parse import urlparse, urljoin
 
-from .lib import Url, Crawler
-
+# from .lib import Url, Crawler
+from .lib import Crawler, Url
 
 touched = []
 crawled = []
@@ -161,7 +161,10 @@ def crawl(url):
 
 
 def main():
-    validate_argument_count(sys.argv)
-    crawl(sys.argv[1])
-    print('{} link(s) crawled'.format(len(crawled)))
-
+    # validate_argument_count(sys.argv)
+    # crawl(sys.argv[1])
+    # print('{} link(s) crawled'.format(len(crawled)))
+    crawler = Crawler('dummy-url-1')
+    crawler.add_url_as_string('dummy-url-2')
+    crawler.add_url_as_string('dummy-url-3')
+    crawler.crawl()
