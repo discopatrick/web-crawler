@@ -7,11 +7,17 @@ class Crawler(object):
 
     def __init__(self, start_url):
         self._url_list = []
-        self.add_url_as_string(start_url)
+        start_url_obj = Url(start_url)
+        self._start_url = start_url_obj
+        self._url_list.append(start_url_obj)
 
     @property
     def url_list_as_strings(self):
         return tuple(url_object.url for url_object in self._url_list)
+
+    @property
+    def domain(self):
+        return self._start_url.domain
 
     def add_url_as_string(self, url_string):
         url_obj = Url(url_string)
