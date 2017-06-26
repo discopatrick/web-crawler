@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 class Url(object):
 
     def __init__(self, url_string):
@@ -10,3 +12,7 @@ class Url(object):
     @property
     def url(self):
         return self._url
+
+    def belongs_to_domain(self, domain):
+        parsed = urlparse(self._url)
+        return domain == parsed.netloc
