@@ -13,6 +13,13 @@ class Url(object):
     def url(self):
         return self._url
 
+    @property
+    def domain(self):
+        return self._get_domain()
+
+    def _get_domain(self):
+        return urlparse(self._url).netloc
+
     def belongs_to_domain(self, domain):
         parsed = urlparse(self._url)
         return domain == parsed.netloc

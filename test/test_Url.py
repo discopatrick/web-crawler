@@ -20,3 +20,8 @@ class UrlTest(TestCase):
         url_object = Url('http://www.google.co.uk/abc')
 
         self.assertFalse(url_object.belongs_to_domain('www.yahoo.co.uk'))
+
+    def test_Url_get_domain(self):
+        url_object = Url('http://www.amazon.co.uk/abc')
+
+        self.assertEqual(url_object.domain, 'www.amazon.co.uk')
