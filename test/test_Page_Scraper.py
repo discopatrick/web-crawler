@@ -2,7 +2,7 @@ from unittest import TestCase
 from source.lib import PageScraper
 
 
-class UrlTest(TestCase):
+class PageScraperTest(TestCase):
 
     def test_Page_Scraper_init(self):
         html = """
