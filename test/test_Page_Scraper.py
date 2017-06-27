@@ -5,4 +5,7 @@ from source.lib import PageScraper
 class UrlTest(TestCase):
 
     def test_Page_Scraper_init(self):
-        page_scraper = PageScraper()
+        html = """
+            <html></html>
+        """
+        page_scraper = PageScraper(html)

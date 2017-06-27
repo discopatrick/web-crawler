@@ -1,2 +1,4 @@
 class PageScraper(object):
-    pass
+
+    def __init__(self, html):
+        pass
