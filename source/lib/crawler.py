@@ -19,6 +19,9 @@ class Crawler(object):
     def domain(self):
         return self._start_url.domain
 
+    def crawled_count(self):
+        return len([url for url in self._url_list if url.crawled])
+
     def add_url_as_string(self, url_string):
         url_obj = Url(url_string)
         self._url_list.append(url_obj)

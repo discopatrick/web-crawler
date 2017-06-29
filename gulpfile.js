@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var shell = require('gulp-shell');
+var connect = require('gulp-connect');
 
 gulp.task('test', shell.task([
   'venv/bin/python -m unittest'
@@ -22,5 +23,11 @@ gulp.task('watch', function(){
     ['test']
   )
 })
+
+gulp.task('connect', function() {
+  connect.server({
+    root: ['test/functional/site']
+  });
+});
 
 gulp.task('default', ['test']);
