@@ -30,11 +30,14 @@ class Crawler(object):
 
     def _get_next_uncrawled_url(self):
         for url_obj in self._url_list:
-            if url_obj.crawled is False:
+            if url_obj.crawled is False and url_obj.status_code != 404:
                 return url_obj
 
     def _crawl_url(self, url_obj):
         r = requests.get(url_obj.url)
+        if r.status_code == 404:
+            url_obj.status_code = 404
+            return # url_obj.crawled remains False
         page_scraper = PageScraper(r.text)
         links = page_scraper.links
         for link in links:
