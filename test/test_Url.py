@@ -1,5 +1,5 @@
 from unittest import TestCase, skip
-from source.web_crawler import *
+from source.web_crawler import Url
 
 
 class UrlTest(TestCase):
