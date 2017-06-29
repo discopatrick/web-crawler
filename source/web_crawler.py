@@ -33,7 +33,9 @@ def link_belongs_to_domain(link, domain):
 
 
 def validate_argument_count(args):
-    if len(args) == 2:
+    if len(args) < 2:
+        raise SystemExit('Not enough arguments')
+    elif len(args) == 2:
         return True
     else:
         raise SystemExit('Too many arguments')
@@ -161,10 +163,7 @@ def crawl(url):
 
 
 def main():
-    # validate_argument_count(sys.argv)
-    # crawl(sys.argv[1])
-    # print('{} link(s) crawled'.format(len(crawled)))
-    crawler = Crawler('dummy-url-1')
-    crawler.add_url_as_string('dummy-url-2')
-    crawler.add_url_as_string('dummy-url-3')
+    validate_argument_count(sys.argv)
+    crawler = Crawler(sys.argv[1])
     crawler.crawl()
+    print('{} link(s) crawled'.format(crawler.crawled_count()))
