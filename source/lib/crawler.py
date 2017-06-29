@@ -1,7 +1,9 @@
 import random
+import requests
 from uuid import uuid4
 
 from .url import Url
+from .page_scraper import PageScraper
 
 class Crawler(object):
 
@@ -31,12 +33,14 @@ class Crawler(object):
             if url_obj.crawled is False:
                 return url_obj
 
-    def _get_random_bool(self):
-        return bool(random.getrandbits(1))
-
     def _crawl_url(self, url_obj):
-        if self._get_random_bool():
-            self.add_url_as_string('dummy-url-{}'.format(uuid4()))
+        r = requests.get(url_obj.url)
+        page_scraper = PageScraper(r.text)
+        links = page_scraper.links
+        for link in links:
+            new_url_obj = Url(link, referrer=url_obj.url)
+            if new_url_obj.belongs_to_domain(self.domain):
+                self._url_list.append(new_url_obj)
         url_obj.crawled = True
 
     def crawl(self):

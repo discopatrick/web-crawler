@@ -22,5 +22,5 @@ class Url(object):
         return urlparse(self._url).netloc
 
     def belongs_to_domain(self, domain):
-        parsed = urlparse(self._url)
+        parsed = urlparse(self.url)
         return domain == parsed.netloc
