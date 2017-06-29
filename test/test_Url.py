@@ -25,3 +25,10 @@ class UrlTest(TestCase):
         url_object = Url('http://www.amazon.co.uk/abc')
 
         self.assertEqual(url_object.domain, 'www.amazon.co.uk')
+
+    def test_Url_url_returns_fully_qualified_url(self):
+        url_object = Url('this-page.html', referrer='http://www.example.com/')
+        self.assertEqual(
+            url_object.url,
+            'http://www.example.com/this-page.html'
+        )

@@ -1,17 +1,18 @@
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 
 class Url(object):
 
-    def __init__(self, url_string):
+    def __init__(self, url_string, referrer=None):
         self._url = url_string
         self.crawled = False
+        self._referrer = referrer
 
     def __str__(self):
         return '<Url object - _url: {} - crawled: {}>'.format(self._url, self.crawled)
 
     @property
     def url(self):
-        return self._url
+        return urljoin(self._referrer, self._url)
 
     @property
     def domain(self):
