@@ -7,6 +7,7 @@ class Url(object):
         self.crawled = False
         self._referrer = referrer
         self.status_code = None
+        self.is_html = True
 
     def __str__(self):
         return '<Url object - _url: {} - crawled: {}>'.format(self._url, self.crawled)

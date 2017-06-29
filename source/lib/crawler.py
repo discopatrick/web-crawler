@@ -30,20 +30,34 @@ class Crawler(object):
 
     def _get_next_uncrawled_url(self):
         for url_obj in self._url_list:
-            if url_obj.crawled is False and url_obj.status_code != 404:
+            if url_obj.crawled is False \
+              and url_obj.status_code != 404 \
+              and url_obj.is_html:
                 return url_obj
+
+    def _already_in_list(self, new_url_obj):
+        for url_obj in self._url_list:
+            if url_obj.url == new_url_obj.url:
+                return True
+        return False
 
     def _crawl_url(self, url_obj):
         r = requests.get(url_obj.url)
         if r.status_code == 404:
             url_obj.status_code = 404
             return # url_obj.crawled remains False
+        elif not r.headers['content-type'].startswith('text/html'):
+            url_obj.is_html = False
+            return
+
         page_scraper = PageScraper(r.text)
         links = page_scraper.links
         for link in links:
             new_url_obj = Url(link, referrer=url_obj.url)
-            if new_url_obj.belongs_to_domain(self.domain):
+            if new_url_obj.belongs_to_domain(self.domain) \
+              and not self._already_in_list(new_url_obj):
                 self._url_list.append(new_url_obj)
+
         url_obj.crawled = True
 
     def crawl(self):
