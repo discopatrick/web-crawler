@@ -37,11 +37,13 @@ class PageScraperTest(TestCase):
                 <body>
                     <a href="this-page.html">This Page</a>
                     <img src="smiley-face.jpg"/>
+                    <a href="another-page.html">Another Page</a>
                 </body>
             </html>
         """
         page_scraper = PageScraper(html)
         expected_assets = [
+            'another-page.html',
             'style.css',
             'script.js',
             'this-page.html',
