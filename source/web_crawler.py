@@ -46,5 +46,5 @@ def remove_query_and_fragment(link_list):
 def main():
     validate_argument_count(sys.argv)
     crawler = Crawler(sys.argv[1])
-    crawler.crawl()
-    print('{} link(s) crawled'.format(crawler.crawled_count()))
+    report = crawler.crawl()
+    print(report)

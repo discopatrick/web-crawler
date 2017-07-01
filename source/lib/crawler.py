@@ -60,6 +60,14 @@ class Crawler(object):
 
         url_obj.crawled = True
 
+    def _get_report(self):
+        report = ""
+        for url_obj in self._url_list:
+            if url_obj.crawled:
+                report += ('[page] ' + url_obj.url + '\n')
+        report += '{} link(s) crawled'.format(self.crawled_count()) + '\n'
+        return report
+
     def crawl(self):
         while True:
             next = self._get_next_uncrawled_url()
@@ -67,3 +75,4 @@ class Crawler(object):
                 self._crawl_url(next)
             else:
                 break
+        return self._get_report()
