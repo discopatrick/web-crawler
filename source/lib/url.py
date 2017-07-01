@@ -10,7 +10,8 @@ class Url(object):
         self.is_html = True
 
     def __str__(self):
-        return '<Url object - _url: {} - crawled: {}>'.format(self._url, self.crawled)
+        template = '<Url object - _url: {} - crawled: {}>'
+        return template.format(self._url, self.crawled)
 
     @property
     def url(self):
