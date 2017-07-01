@@ -48,3 +48,19 @@ class UrlTest(TestCase):
         )
         expected_url = 'http://www.google.co.uk/abc'
         self.assertEqual(url_object.url, expected_url)
+
+    def test_Url_url_trims_query_but_not_fragment(self):
+        url_object = Url(
+            'http://www.google.co.uk/abc?foo=bar#foobar',
+            trim_query=True
+        )
+        expected_url = 'http://www.google.co.uk/abc#foobar'
+        self.assertEqual(url_object.url, expected_url)
+
+    def test_Url_url_trims_fragment_but_not_query(self):
+        url_object = Url(
+            'http://www.google.co.uk/abc?foo=bar#foobar',
+            trim_fragment=True
+        )
+        expected_url = 'http://www.google.co.uk/abc?foo=bar'
+        self.assertEqual(url_object.url, expected_url)
