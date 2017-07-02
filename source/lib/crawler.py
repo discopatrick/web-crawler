@@ -7,6 +7,7 @@ from .page_scraper import PageScraper
 
 class Crawler(object):
 
+    # TODO: add ignore_query argument
     def __init__(self, start_url, ignore_fragment=False):
         self._url_list = []
         self._ignore_fragment = ignore_fragment
@@ -50,6 +51,9 @@ class Crawler(object):
 
         page_scraper = PageScraper(r.text)
         links = page_scraper.links
+
+        # TODO: make inventory of all page assets for report
+
         for link in links:
             # TODO: DRY Url object creation
             new_url_obj = Url(link, trim_fragment=self._ignore_fragment,
