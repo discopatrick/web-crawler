@@ -22,3 +22,13 @@ class CrawlerTest(TestCase):
         crawler = Crawler('http://www.bbc.co.uk/def')
 
         self.assertEqual(crawler.domain, 'www.bbc.co.uk')
+
+    def test_Crawler_ignores_fragments(self):
+        fragment_url = 'http://www.yoyowallet.com#foo'
+
+        crawler = Crawler(fragment_url, ignore_fragment=True)
+
+        expected_url = 'http://www.yoyowallet.com'
+
+        self.assertIn(expected_url, crawler.url_list_as_strings)
+        self.assertNotIn(fragment_url, crawler.url_list_as_strings)

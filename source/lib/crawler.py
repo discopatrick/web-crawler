@@ -7,9 +7,11 @@ from .page_scraper import PageScraper
 
 class Crawler(object):
 
-    def __init__(self, start_url):
+    def __init__(self, start_url, ignore_fragment=False):
         self._url_list = []
-        start_url_obj = Url(start_url)
+        self._ignore_fragment = ignore_fragment
+        # TODO: DRY Url object creation
+        start_url_obj = Url(start_url, trim_fragment=self._ignore_fragment)
         self._start_url = start_url_obj
         self._url_list.append(start_url_obj)
 
@@ -25,6 +27,7 @@ class Crawler(object):
         return len([url for url in self._url_list if url.crawled])
 
     def add_url_as_string(self, url_string):
+        # TODO: DRY Url object creation
         url_obj = Url(url_string)
         self._url_list.append(url_obj)
 
@@ -53,6 +56,7 @@ class Crawler(object):
         page_scraper = PageScraper(r.text)
         links = page_scraper.links
         for link in links:
+            # TODO: DRY Url object creation
             new_url_obj = Url(link, referrer=url_obj.url)
             if new_url_obj.belongs_to_domain(self.domain) \
               and not self._already_in_list(new_url_obj):
