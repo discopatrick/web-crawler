@@ -57,7 +57,8 @@ class Crawler(object):
         links = page_scraper.links
         for link in links:
             # TODO: DRY Url object creation
-            new_url_obj = Url(link, referrer=url_obj.url)
+            new_url_obj = Url(link, trim_fragment=self._ignore_fragment,
+                referrer=url_obj.url)
             if new_url_obj.belongs_to_domain(self.domain) \
               and not self._already_in_list(new_url_obj):
                 self._url_list.append(new_url_obj)
