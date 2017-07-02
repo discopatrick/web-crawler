@@ -11,8 +11,8 @@ gulp.task('flake8', shell.task([
 ]));
 
 gulp.task('autopep8', shell.task([
-    'venv/bin/autopep8 source/*.py -i',
-    'venv/bin/autopep8 test/*.py -i'
+    'venv/bin/autopep8 source --in-place --recursive',
+    'venv/bin/autopep8 test/*.py --in-place --recursive'
 ]));
 
 gulp.task('watch', function(){
