@@ -1,0 +1,6 @@
+language: python
+python:
+  - "3.6"
+script:
+  - flake8 test/ source/
+  - python -m unittest discover test.unit
