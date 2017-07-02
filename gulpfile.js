@@ -1,8 +1,9 @@
 var gulp = require('gulp');
 var shell = require('gulp-shell');
+var connect = require('gulp-connect');
 
 gulp.task('test', shell.task([
-  'python -m unittest'
+  'venv/bin/python -m unittest'
 ]));
 
 gulp.task('flake8', shell.task([
@@ -22,5 +23,11 @@ gulp.task('watch', function(){
     ['test']
   )
 })
+
+gulp.task('connect', function() {
+  connect.server({
+    root: ['test/functional/site']
+  });
+});
 
 gulp.task('default', ['test']);
