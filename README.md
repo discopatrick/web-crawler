@@ -1,5 +1,7 @@
 # A web crawler project
 
+[![Build Status](https://travis-ci.org/discopatrick/web-crawler.svg?branch=develop)](https://travis-ci.org/discopatrick/web-crawler)
+
 Written and tested against Python 3.6, using a virtualenv
 
 To setup and activate the virtualenv:
