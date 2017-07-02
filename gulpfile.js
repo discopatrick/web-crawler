@@ -20,7 +20,7 @@ gulp.task('watch', function(){
     [
       './**/*.py',
     ],
-    ['test']
+    ['flake8', 'test']
   )
 })
 
