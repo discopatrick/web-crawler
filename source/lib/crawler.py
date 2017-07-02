@@ -26,11 +26,6 @@ class Crawler(object):
     def crawled_count(self):
         return len([url for url in self._url_list if url.crawled])
 
-    def add_url_as_string(self, url_string):
-        # TODO: DRY Url object creation
-        url_obj = Url(url_string)
-        self._url_list.append(url_obj)
-
     def _get_next_uncrawled_url(self):
         for url_obj in self._url_list:
             if url_obj.crawled is False \

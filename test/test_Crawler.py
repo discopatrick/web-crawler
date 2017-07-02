@@ -10,14 +10,6 @@ class CrawlerTest(TestCase):
 
         self.assertIn(start_url, crawler.url_list_as_strings)
 
-    def test_Crawler_add_url(self):
-        crawler = Crawler('http://www.yoyowallet.com/')
-        additional_url = 'http://www.bbc.co.uk/'
-
-        crawler.add_url_as_string(additional_url)
-
-        self.assertIn(additional_url, crawler.url_list_as_strings)
-
     def test_Crawler_domain(self):
         crawler = Crawler('http://www.bbc.co.uk/def')
 
