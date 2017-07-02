@@ -1,5 +1,6 @@
-from unittest import TestCase, skip
-from source.web_crawler import *
+from unittest import TestCase
+from source.lib import Crawler
+
 
 class CrawlerTest(TestCase):
 

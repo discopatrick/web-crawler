@@ -8,7 +8,7 @@ class PageScraperTest(TestCase):
         html = """
             <html></html>
         """
-        page_scraper = PageScraper(html)
+        PageScraper(html)
 
     def test_links_property_returns_all_links(self):
         html = """
@@ -49,7 +49,7 @@ class PageScraperTest(TestCase):
             'this-page.html',
             'smiley-face.jpg',
         ]
-        
+
         returned_assets = page_scraper.assets
 
         for asset in expected_assets:

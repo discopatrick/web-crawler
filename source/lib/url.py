@@ -1,9 +1,10 @@
 from urllib.parse import urlparse, urlunparse, urljoin
 
+
 class Url(object):
 
     def __init__(self, url_string, referrer=None, trim_query=False,
-      trim_fragment=False):
+                 trim_fragment=False):
         self._url = url_string
         self.crawled = False
         self._referrer = referrer
@@ -30,7 +31,6 @@ class Url(object):
             p = p._replace(fragment=None)
 
         return urlunparse(p)
-
 
     @property
     def domain(self):

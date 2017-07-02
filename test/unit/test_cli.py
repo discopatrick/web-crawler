@@ -1,5 +1,5 @@
 from unittest import TestCase
-from source.web_crawler import *
+from source.web_crawler import validate_argument_count
 
 
 class CLITest(TestCase):
