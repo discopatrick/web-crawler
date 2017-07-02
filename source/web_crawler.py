@@ -1,7 +1,7 @@
 import sys
-from urllib.parse import urlparse
 
-from .lib import Crawler, Url
+from .lib import Crawler
+
 
 def validate_argument_count(args):
     if len(args) < 2:
@@ -10,6 +10,7 @@ def validate_argument_count(args):
         return True
     else:
         raise SystemExit('Too many arguments')
+
 
 def uniquify(seq):
     """
@@ -32,6 +33,7 @@ def uniquify(seq):
 #             print('       - ' + asset)
 #     else:
 #         print('       - (no assets)')
+
 
 def main():
     validate_argument_count(sys.argv)

@@ -1,5 +1,6 @@
 from pyquery import PyQuery as pq
 
+
 class PageScraper(object):
 
     def __init__(self, html):
