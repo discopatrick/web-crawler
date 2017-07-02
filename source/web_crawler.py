@@ -35,6 +35,6 @@ def uniquify(seq):
 
 def main():
     validate_argument_count(sys.argv)
-    crawler = Crawler(sys.argv[1])
+    crawler = Crawler(sys.argv[1], ignore_fragment=True)
     report = crawler.crawl()
     print(report)
