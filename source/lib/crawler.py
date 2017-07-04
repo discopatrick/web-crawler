@@ -1,4 +1,6 @@
 import requests
+import threading
+import time
 
 from .url import Url
 from .page_scraper import PageScraper
@@ -40,6 +42,9 @@ class Crawler(object):
         return False
 
     def _crawl_url(self, url_obj):
+        print('Thread {} crawling {}'.format(
+            threading.currentThread().getName(),
+            url_obj.url))
         r = requests.get(url_obj.url)
         if r.status_code == 404:
             url_obj.status_code = 404
@@ -73,9 +78,12 @@ class Crawler(object):
 
     def crawl(self):
         while True:
+            time.sleep(0.25)
             next = self._get_next_uncrawled_url()
             if next is not None:
-                self._crawl_url(next)
+                t = threading.Thread(target=self._crawl_url,
+                                     args=(next,))
+                t.start()
             else:
                 break
         return self._get_report()
