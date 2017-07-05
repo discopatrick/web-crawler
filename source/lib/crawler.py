@@ -76,7 +76,7 @@ class Crawler(object):
         url_obj.crawled = True
 
     def _get_report(self):
-        report = ""
+        report = "\nReport:\n"
         for url_obj in self._url_list:
             if url_obj.crawled:
                 report += ('[page] ' + url_obj.url + '\n')
