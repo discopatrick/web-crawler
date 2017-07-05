@@ -76,9 +76,12 @@ class Crawler(object):
         report += '{} link(s) crawled'.format(self.crawled_count()) + '\n'
         return report
 
-    def crawl(self):
+    def _crawl_thread(self):
         while not self._queue.empty():
             next = self._queue.get()
             self._crawl_url(next)
             self._queue.task_done()
+
+    def crawl(self):
+        self._crawl_thread()
         return self._get_report()
