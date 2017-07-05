@@ -10,8 +10,7 @@ class Crawler(object):
     def __init__(self, start_url, ignore_fragment=False):
         self._url_list = []
         self._ignore_fragment = ignore_fragment
-        # TODO: DRY Url object creation
-        start_url_obj = Url(start_url, trim_fragment=self._ignore_fragment)
+        start_url_obj = self.urlobj_factory(start_url)
         self._start_url = start_url_obj
         self._url_list.append(start_url_obj)
 
@@ -22,6 +21,11 @@ class Crawler(object):
     @property
     def domain(self):
         return self._start_url.domain
+
+    def urlobj_factory(self, url_string, referrer=None):
+        url_obj = Url(url_string, trim_fragment=self._ignore_fragment,
+                      referrer=referrer)
+        return url_obj
 
     def crawled_count(self):
         return len([url for url in self._url_list if url.crawled])
@@ -54,9 +58,7 @@ class Crawler(object):
         # TODO: make inventory of all page assets for report
 
         for link in links:
-            # TODO: DRY Url object creation
-            new_url_obj = Url(link, trim_fragment=self._ignore_fragment,
-                              referrer=url_obj.url)
+            new_url_obj = self.urlobj_factory(link, referrer=url_obj.url)
             if new_url_obj.belongs_to_domain(self.domain) \
                     and not self._already_in_list(new_url_obj):
                 self._url_list.append(new_url_obj)
