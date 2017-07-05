@@ -1,5 +1,8 @@
 import requests
+import time
+import random
 from queue import Queue
+from threading import Thread
 
 from .url import Url
 from .page_scraper import PageScraper
@@ -18,6 +21,8 @@ class Crawler(object):
         # TODO: DRY appending to list/queue
         self._url_list.append(start_url_obj)
         self._queue.put(start_url_obj)
+
+        self._num_threads = 5
 
     @property
     def url_list_as_strings(self):
@@ -42,6 +47,8 @@ class Crawler(object):
         return False
 
     def _crawl_url(self, url_obj):
+        # wait between 1 and 3 seconds before requesting url
+        time.sleep(random.uniform(1.0, 3.0))
         r = requests.get(url_obj.url)
         if r.status_code == 404:
             url_obj.status_code = 404
@@ -77,11 +84,15 @@ class Crawler(object):
         return report
 
     def _crawl_thread(self):
-        while not self._queue.empty():
+        while True:
             next = self._queue.get()
             self._crawl_url(next)
             self._queue.task_done()
 
     def crawl(self):
-        self._crawl_thread()
+        for i in range(self._num_threads):
+            worker = Thread(target=self._crawl_thread)
+            worker.setDaemon(True)
+            worker.start()
+        self._queue.join()
         return self._get_report()
