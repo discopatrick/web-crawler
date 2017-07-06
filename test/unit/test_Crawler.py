@@ -25,3 +25,12 @@ class CrawlerTest(TestCase):
 
         self.assertIn(expected_url, crawler.url_list_as_strings)
         self.assertNotIn(fragment_url, crawler.url_list_as_strings)
+
+    def test_Crawler_urlobj_factory_returns_url_object(self):
+        start_url = 'http://www.bbc.co.uk/'
+        additonal_url = 'http://www.bbc.co.uk/abc'
+
+        crawler = Crawler(start_url)
+        url_obj = crawler.urlobj_factory(additonal_url)
+
+        self.assertEqual(additonal_url, url_obj.url)
